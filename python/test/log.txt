@@ -1,0 +1,17 @@
+    /Users/zhouyifan/Code/test-code/python/test/pip_update.py
+    /Users/zhouyifan/Code/test-code/python/test/rm.py
+    /Users/zhouyifan/Code/test-code/python/test/study_pandas.py
+    /Users/zhouyifan/Code/test-code/python/test/test1.py
+    /Users/zhouyifan/Code/test-code/python/test/test7.py
+    /Users/zhouyifan/Code/test-code/web
+    /Users/zhouyifan/Code/test-code/web/canvas
+    /Users/zhouyifan/Code/test-code/web/canvas/canvas.html
+    /Users/zhouyifan/Code/test-code/web/canvas/canvas1.js
+    /Users/zhouyifan/Code/test-code/web/canvas/canvas2.js
+    /Users/zhouyifan/Code/test-code/web/canvas/canvas3.js
+    /Users/zhouyifan/Code/test-code/web/http.js
+    /Users/zhouyifan/Code/test-code/web/img-input
+    /Users/zhouyifan/Code/test-code/web/selector.js
+    /Users/zhouyifan/Code/test-code/web/test.html
+    /Users/zhouyifan/Code/test-code/web/test2.html
+    /Users/zhouyifan/Code/test-code/web/test3.html
