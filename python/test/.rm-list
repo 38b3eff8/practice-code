@@ -9,6 +9,3 @@ CMakeCache.txt
 
 *.out
 *.so
-
--.git/
--.rm-list

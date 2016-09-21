@@ -1,7 +1,9 @@
 .DS_Store
 .idea/
+
 __pycache__/
 
+node_modules/
 
 CMakeFiles/
 cmake_install.cmake
