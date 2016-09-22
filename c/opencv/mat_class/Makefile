@@ -48,10 +48,10 @@ RM = /usr/local/Cellar/cmake/3.6.2/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/zhouyifan/Code/test-code/c/opencv/display_image
+CMAKE_SOURCE_DIR = /Users/zhouyifan/Code/test-code/c/opencv/mat_class
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/zhouyifan/Code/test-code/c/opencv/display_image
+CMAKE_BINARY_DIR = /Users/zhouyifan/Code/test-code/c/opencv/mat_class
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zhouyifan/Code/test-code/c/opencv/display_image/CMakeFiles /Users/zhouyifan/Code/test-code/c/opencv/display_image/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zhouyifan/Code/test-code/c/opencv/mat_class/CMakeFiles /Users/zhouyifan/Code/test-code/c/opencv/mat_class/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zhouyifan/Code/test-code/c/opencv/display_image/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/zhouyifan/Code/test-code/c/opencv/mat_class/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named DisplayImage
+# Target rules for targets named MatClass
 
 # Build rule for target.
-DisplayImage: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 DisplayImage
-.PHONY : DisplayImage
+MatClass: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 MatClass
+.PHONY : MatClass
 
 # fast build rule for target.
-DisplayImage/fast:
-	$(MAKE) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/build
-.PHONY : DisplayImage/fast
+MatClass/fast:
+	$(MAKE) -f CMakeFiles/MatClass.dir/build.make CMakeFiles/MatClass.dir/build
+.PHONY : MatClass/fast
 
-DisplayImage.o: DisplayImage.cpp.o
+MatClass.o: MatClass.cpp.o
 
-.PHONY : DisplayImage.o
+.PHONY : MatClass.o
 
 # target to build an object file
-DisplayImage.cpp.o:
-	$(MAKE) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/DisplayImage.cpp.o
-.PHONY : DisplayImage.cpp.o
+MatClass.cpp.o:
+	$(MAKE) -f CMakeFiles/MatClass.dir/build.make CMakeFiles/MatClass.dir/MatClass.cpp.o
+.PHONY : MatClass.cpp.o
 
-DisplayImage.i: DisplayImage.cpp.i
+MatClass.i: MatClass.cpp.i
 
-.PHONY : DisplayImage.i
+.PHONY : MatClass.i
 
 # target to preprocess a source file
-DisplayImage.cpp.i:
-	$(MAKE) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/DisplayImage.cpp.i
-.PHONY : DisplayImage.cpp.i
+MatClass.cpp.i:
+	$(MAKE) -f CMakeFiles/MatClass.dir/build.make CMakeFiles/MatClass.dir/MatClass.cpp.i
+.PHONY : MatClass.cpp.i
 
-DisplayImage.s: DisplayImage.cpp.s
+MatClass.s: MatClass.cpp.s
 
-.PHONY : DisplayImage.s
+.PHONY : MatClass.s
 
 # target to generate assembly for a file
-DisplayImage.cpp.s:
-	$(MAKE) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/DisplayImage.cpp.s
-.PHONY : DisplayImage.cpp.s
+MatClass.cpp.s:
+	$(MAKE) -f CMakeFiles/MatClass.dir/build.make CMakeFiles/MatClass.dir/MatClass.cpp.s
+.PHONY : MatClass.cpp.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... DisplayImage"
-	@echo "... DisplayImage.o"
-	@echo "... DisplayImage.i"
-	@echo "... DisplayImage.s"
+	@echo "... MatClass"
+	@echo "... MatClass.o"
+	@echo "... MatClass.i"
+	@echo "... MatClass.s"
 .PHONY : help
 
 
