@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <canvas id="canvas" width="1000" height="500" style="background: #000;"></canvas>
+    <script src="js/utils.js" charset="utf-8"></script>
+    <script src="js/spaceShip.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            var canvas = document.querySelector('#canvas'),
+                context = canvas.getContext('2d');
+
+            var spaceShip = new SpaceShip();
+            spaceShip.x = canvas.width / 2;
+            spaceShip.y = canvas.height / 2;
+
+            var vr = 0,
+                vx = 0,
+                vy = 0,
+                ax = 0,
+                ay = 0,
+                angle = 0,
+                thrust = 0;
+
+            window.addEventListener('keydown', function(event) {
+                switch (event.keyCode) {
+                    case 37: // left
+                        vr = -3;
+                        break;
+                    case 39: // right
+                        vr = 3;
+                        break;
+                    case 38: // up
+                        spaceShip.showFlame = true;
+                        thrust = 0.05;
+                        break;
+                    case 40:
+                        ax = 0;
+                        ay = 0;
+                        vx = 0;
+                        vy = 0;
+                        break;
+                    default:
+                        break;
+                }
+            }, false);
+
+            window.addEventListener('keyup', function(event) {
+                vr = 0;
+                thrust = 0;
+                spaceShip.showFlame = false;
+            }, false);
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                spaceShip.rotation += vr * Math.PI / 180;
+
+                angle = spaceShip.rotation;
+                ax = Math.cos(angle) * thrust;
+                ay = Math.sin(angle) * thrust;
+
+                vx += ax;
+                vy += ay;
+
+                if (spaceShip.x - spaceShip.width / 2 < 0 || spaceShip.x + spaceShip.width / 2 > canvas.width) {
+                    ax = -ax;
+                    vx = -vx;
+                }
+                console.log(spaceShip.y - spaceShip.height / 2);
+                console.log(spaceShip.y + spaceShip.height / 2);
+                if (spaceShip.y - spaceShip.height / 2 < 0 || spaceShip.y + spaceShip.height / 2 > canvas.height) {
+                    ay = -ay;
+                    vy = -vy;
+                }
+
+                spaceShip.x += vx;
+                spaceShip.y += vy;
+
+                spaceShip.draw(context);
+            })();
+        }
+    </script>
+</body>
+
+</html>

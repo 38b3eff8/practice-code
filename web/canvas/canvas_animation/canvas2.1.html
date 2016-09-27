@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500" style="background: #000;"></canvas>
+    <p id="log"></p>
+    <script src="utils.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            var canvas = document.querySelector('#canvas'),
+                mouse = utils.captureMouse(canvas),
+                touch = utils.captureTouch(canvas);
+            canvas.addEventListener('mousedown', function(event) {
+                console.log("x: " + mouse.x + ", y: " + mouse.y);
+            });
+
+            var logElement = document.querySelector('#log');
+            canvas.addEventListener('mousemove', function(event) {
+                logElement.innerText = "x: " + mouse.x + ", y: " + mouse.y + "\n" + "x: " + touch.x + ", y: " + touch.y;
+            });
+
+            canvas.addEventListener('touchmove', function(event) {
+                logElement.innerText = "x: " + mouse.x + ", y: " + mouse.y + "\n" + "x: " + touch.x + ", y: " + touch.y;
+            });
+
+            function onKeyboard(event) {
+                switch (event.keyCode) {
+                    case 38:
+                        console.log('up!');
+                        break;
+                    case 40:
+                        console.log('down!');
+                        break;
+                    case 37:
+                        console.log('left!');
+                        break;
+                    case 39:
+                        console.log('right!');
+                        break;
+                    default:
+                        console.log(event.keyCode);
+                }
+            }
+
+            window.addEventListener('keydown', onKeyboard, false);
+        }
+    </script>
+</body>
+
+</html>

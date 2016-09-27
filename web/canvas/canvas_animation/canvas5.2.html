@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <canvas id="canvas" width="400" height="400" style="background: #000;"></canvas>
+    <p id="log"></p>
+    <script src="js/utils.js" charset="utf-8"></script>
+    <script src="js/ball.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            var canvas = document.querySelector('#canvas'),
+                context = canvas.getContext('2d'),
+                log = document.querySelector('#log');
+
+            var balls = [],
+                numBall = 40,
+                canWid = canvas.width,
+                canHei = canvas.height;
+
+            for (var i = 0; i < numBall; i++) {
+                var size = Math.random() * 20 + 5,
+                    color = Math.random() * (0xFFFFFF),
+                    ball = new Ball(size, color);
+
+                ball.id = "ball_" + i;
+                ball.radius = Math.random() * 30 + 10;
+                ball.x = Math.random() * canWid;
+                ball.y = Math.random() * canHei;
+                ball.vx = Math.random() * 2 - 1;
+                ball.vy = Math.random() * 2 - 1;
+
+                balls.push(ball);
+            }
+
+            function draw(ball, pos) {
+                ball.x += ball.vx;
+                ball.y += ball.vy;
+
+                if (ball.x - ball.radius > canvas.width ||
+                    ball.radius + ball.x < 0 ||
+                    ball.y - ball.radius > canvas.height ||
+                    ball.radius + ball.y < 0) {
+
+                    ball.x = canvas.width / 2;
+                    ball.y = canvas.height;
+                    ball.vx = Math.random() * (2) - 1;
+                    ball.vy = Math.random() * (-2) - 1;
+                }
+
+                ball.draw(context)
+            }
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                balls.forEach(draw)
+            })();
+        }
+    </script>
+</body>
+
+</html>
