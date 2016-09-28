@@ -132,12 +132,20 @@ class Space {
             return;
         }
 
+        let numBorder = Array.from({
+            length: this.col
+        }, (v, i) => i).join(' ');
+        console.log('    ' + numBorder + '  ');
+
         let topBorder = Array.from({
-            length: 22
-        }, () => '─').join('');
-        console.log('┌' + topBorder + '┐');
-        for (let i of this.place) {
-            let str = '│ ';
+            length: this.col
+        }, (v, i) => '─').join(' ');
+
+        console.log('  ┌ ' + topBorder + ' ┐');
+
+        for (let index = 0; index < this.place.length; index++) {
+            let i = this.place[index];
+            let str = index + ' | ';
             for (let j of i) {
                 if (display) {
                     if (j.type == -1) {
@@ -162,27 +170,12 @@ class Space {
                 }
             }
 
-            str += ' │';
+            str += '│';
             console.log(str);
         }
-        console.log('└' + topBorder + '┘');
-    }
-
-    click(x, y) {
-        this.handleClick(x, y);
-        this.print();
-    }
-
-    mark(x, y){
-        this.place[y][x].type = -2;
-        this.print();
+        console.log('  └ ' + topBorder + ' ┘');
     }
 }
 
 let space = new Space(10, 10, 10);
-space.initPlace();
-
-module.exports = {
-    Space: Space,
-    space: space
-};
+space.print()
