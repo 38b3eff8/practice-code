@@ -98,6 +98,15 @@ class Space {
     }
 
     handleClick(x, y) {
+        if (!this.status) {
+            let result = confirm("被炸死了，是否重新开始？");
+            if (result) {
+                this.first = true;
+                this.fresh();
+            }
+            return;
+        }
+
         let bomb = this.place[y][x];
         if (bomb.display) {
             return;
