@@ -46,6 +46,8 @@ class Space {
 
         this.status = true;
         this.first = true;
+
+        this.fresh();
     }
 
     fresh() {
@@ -64,8 +66,6 @@ class Space {
 
     initPlace(exclude = null) {
         let index = 0;
-
-        this.fresh();
 
         while (index < this.count) {
             let x = randint(0, this.col - 1);
@@ -117,7 +117,7 @@ class Space {
         }
 
         let bomb = this.place[y][x];
-        if (bomb.display) {
+        if (bomb.display || bomb.mark) {
             return;
         }
 
