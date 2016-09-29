@@ -176,6 +176,10 @@ class Space {
     mark(x, y, mark) {
         this.place[y][x].mark = mark;
 
+        if (this.bombs.length == 0) {
+            return false;
+        }
+
         for (let point of this.bombs) {
             let bomb = this.place[point[1]][point[0]];
             if (!bomb.mark) {
