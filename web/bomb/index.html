@@ -13,12 +13,60 @@
 
 <body>
     <canvas id="canvas" width="500" height="500"></canvas>
+    <script src="utils.js" charset="utf-8"></script>
     <script src="bomb.js" charset="utf-8"></script>
+    <script src="draw.js" charset="utf-8"></script>
     <script type="text/javascript">
         let canvas = document.querySelector('#canvas'),
             context = canvas.getContext('2d');
 
+        let rect = new Rect({
+            border: 3,
+            width: canvas.width / 10,
+            height: canvas.height / 10
+        });
+
+        let space = new Space(10, 10, 10);
         
+        let mouse = Utils.getMousePoint(canvas);
+        canvas.addEventListener('click', function() {
+            let x = Math.floor(mouse.x / rect.width);
+            let y = Math.floor(mouse.y / rect.height);
+
+            space.handleClick(x, y);
+        }, false);
+
+        function drawPlayground() {
+            window.requestAnimationFrame(drawPlayground, canvas);
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < 10; i++) {
+                rect.x = i * rect.width;
+                for (let j = 0; j < 10; j++) {
+                    rect.y = j * rect.height;
+
+                    let bomb = space.getPlace(i, j);
+
+                    let text = null;
+                    if (mouse.x >= 0 && mouse.y >= 0 && rect.isContain(mouse.x, mouse.y) && !bomb.display) {
+                        rect.fillColor = "rgba(100,100,100,0.3)";
+                    } else {
+                        if (bomb.display) {
+                            rect.fillColor = "white";
+                            if (bomb.type != 0) {
+                                text = bomb.type != -1 ? bomb.type : 'X';
+                            }
+                        } else {
+                            rect.fillColor = 'rgba(100,100,100,0.1)';
+                        }
+                    }
+
+
+                    rect.draw(context, text);
+                }
+            }
+        }
+
+        drawPlayground();
     </script>
 </body>
 

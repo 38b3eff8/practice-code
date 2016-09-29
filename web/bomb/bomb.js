@@ -38,10 +38,21 @@ class Space {
         this.bombs = [];
 
         this.status = true;
+        this.first = true;
     }
 
     initPlace(exclude = null) {
         let index = 0;
+        this.first = true;
+        for (let i = 0; i < this.row; i++) {
+            for (let j = 0; j < this.col; j++) {
+                this.place[i][j].type = 0;
+                this.place[i][j].display = false;
+            }
+        }
+
+        this.bombs = [];
+
         while (index < this.count) {
             let x = randint(0, this.col - 1);
             let y = randint(0, this.row - 1);
@@ -93,6 +104,11 @@ class Space {
             return;
         }
 
+        if (this.first) {
+            this.initPlace([x, y]);
+            this.first = false;
+        }
+
         this.checkPlace(x, y);
     }
 
@@ -124,6 +140,10 @@ class Space {
                 this.checkPlace(xx, yy);
             }
         }
+    }
+
+    getPlace(x, y) {
+        return this.place[y][x];
     }
 
     print(display = false) {
@@ -176,6 +196,3 @@ class Space {
         console.log('  └ ' + topBorder + ' ┘');
     }
 }
-
-let space = new Space(10, 10, 10);
-space.print()
