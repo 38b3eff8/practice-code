@@ -110,7 +110,6 @@ class Space {
         if (!this.status) {
             let result = confirm("被炸死了，是否重新开始？");
             if (result) {
-                this.first = true;
                 this.fresh();
             }
             return;
@@ -127,7 +126,6 @@ class Space {
 
             let result = confirm("被炸死了，是否重新开始？");
             if (result) {
-                this.first = true;
                 this.fresh();
             }
             return;
@@ -177,7 +175,15 @@ class Space {
 
     mark(x, y, mark) {
         this.place[y][x].mark = mark;
-        console.log(this.place[y][x])
+
+        for (let point of this.bombs) {
+            let bomb = this.place[point[1]][point[0]];
+            if (!bomb.mark) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     print(display = false) {

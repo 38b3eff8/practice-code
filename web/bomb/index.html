@@ -34,10 +34,12 @@
             let x = Math.floor(mouse.x / rect.width);
             let y = Math.floor(mouse.y / rect.height);
 
-            space.mark(x, y, !space.getPlace(x, y).mark);
-
-            console.log(x, y);
-
+            if (space.mark(x, y, !space.getPlace(x, y).mark)) {
+                let result = confirm("过关了？");
+                if (result) {
+                    this.fresh();
+                }
+            }
             e.preventDefault();
         };
         canvas.addEventListener('click', function(event) {
