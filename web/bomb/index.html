@@ -27,9 +27,20 @@
         });
 
         let space = new Space(10, 10, 10);
-        
+
         let mouse = Utils.getMousePoint(canvas);
-        canvas.addEventListener('click', function() {
+
+        document.oncontextmenu = function(e) {
+            let x = Math.floor(mouse.x / rect.width);
+            let y = Math.floor(mouse.y / rect.height);
+
+            space.mark(x, y, !space.getPlace(x, y).mark);
+
+            console.log(x, y);
+
+            e.preventDefault();
+        };
+        canvas.addEventListener('click', function(event) {
             let x = Math.floor(mouse.x / rect.width);
             let y = Math.floor(mouse.y / rect.height);
 
@@ -47,17 +58,18 @@
                     let bomb = space.getPlace(i, j);
 
                     let text = null;
-                    if (mouse.x >= 0 && mouse.y >= 0 && rect.isContain(mouse.x, mouse.y) && !bomb.display) {
+                    if (mouse.x >= 0 && mouse.y >= 0 && rect.isContain(mouse.x, mouse.y) && !bomb.display && !bomb.mark) {
                         rect.fillColor = "rgba(100,100,100,0.3)";
-                    } else {
-                        if (bomb.display) {
-                            rect.fillColor = "white";
-                            if (bomb.type != 0) {
-                                text = bomb.type != -1 ? bomb.type : 'X';
-                            }
-                        } else {
-                            rect.fillColor = 'rgba(100,100,100,0.1)';
+                    } else if (bomb.display) {
+                        rect.fillColor = "white";
+                        if (bomb.type != 0) {
+                            text = bomb.type != -1 ? bomb.type : 'X';
                         }
+                    } else if (bomb.mark) {
+                        rect.fillColor = 'rgba(100,100,100,0.1)';
+                        text = 'F';
+                    } else {
+                        rect.fillColor = 'rgba(100,100,100,0.1)';
                     }
 
 

@@ -6,20 +6,27 @@ function randint(a, b) {
 class Bomb {
     /*
      *  type:
-     *      -3: don't clear
-     *      -2: flag
      *      -1: bomb
      *      0: none
      *      >0: bomds count
      */
-    constructor(type = 0, display = false) {
+    constructor({
+        type = 0,
+        display = false,
+        mark = false
+    } = {}) {
         this.type = type;
         this.display = display;
+        this.mark = mark;
     }
 }
 
 class Space {
-    constructor(row = 10, col = 10, count = 10) {
+    constructor({
+        row = 10,
+        col = 10,
+        count = 10
+    } = {}) {
         this.row = row;
         this.col = col;
 
@@ -43,10 +50,12 @@ class Space {
 
     fresh() {
         this.first = true;
+        this.status = true;
         for (let i = 0; i < this.row; i++) {
             for (let j = 0; j < this.col; j++) {
                 this.place[i][j].type = 0;
                 this.place[i][j].display = false;
+                this.place[i][j].mark = false;
             }
         }
 
@@ -155,7 +164,7 @@ class Space {
                     continue;
 
                 let aroundBomb = this.place[yy][xx];
-                if (aroundBomb.type == -1 || aroundBomb.display)
+                if (aroundBomb.type == -1 || aroundBomb.display || aroundBomb.mark)
                     continue;
                 this.checkPlace(xx, yy);
             }
@@ -164,6 +173,11 @@ class Space {
 
     getPlace(x, y) {
         return this.place[y][x];
+    }
+
+    mark(x, y, mark) {
+        this.place[y][x].mark = mark;
+        console.log(this.place[y][x])
     }
 
     print(display = false) {
