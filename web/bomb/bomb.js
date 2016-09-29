@@ -108,27 +108,18 @@ class Space {
 
     handleClick(x, y) {
         if (!this.status) {
-            let result = confirm("被炸死了，是否重新开始？");
-            if (result) {
-                this.fresh();
-            }
-            return;
+            return false;
         }
 
         let bomb = this.place[y][x];
         if (bomb.display || bomb.mark) {
-            return;
+            return true;
         }
 
         if (bomb.type == -1) {
             bomb.display = true;
             this.status = false;
-
-            let result = confirm("被炸死了，是否重新开始？");
-            if (result) {
-                this.fresh();
-            }
-            return;
+            return false;
         }
 
         if (this.first) {
@@ -137,6 +128,7 @@ class Space {
         }
 
         this.checkPlace(x, y);
+        return true;
     }
 
     checkPlace(x, y) {
