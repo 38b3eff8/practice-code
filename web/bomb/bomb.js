@@ -41,8 +41,7 @@ class Space {
         this.first = true;
     }
 
-    initPlace(exclude = null) {
-        let index = 0;
+    fresh() {
         this.first = true;
         for (let i = 0; i < this.row; i++) {
             for (let j = 0; j < this.col; j++) {
@@ -52,6 +51,12 @@ class Space {
         }
 
         this.bombs = [];
+    }
+
+    initPlace(exclude = null) {
+        let index = 0;
+
+        this.fresh();
 
         while (index < this.count) {
             let x = randint(0, this.col - 1);
@@ -101,6 +106,12 @@ class Space {
         if (bomb.type == -1) {
             bomb.display = true;
             this.status = false;
+
+            let result = confirm("被炸死了，是否重新开始？");
+            if (result) {
+                this.first = true;
+                this.fresh();
+            }
             return;
         }
 
