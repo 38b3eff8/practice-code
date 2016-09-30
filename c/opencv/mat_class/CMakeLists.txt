@@ -4,6 +4,6 @@ project(MatClass)
 
 find_package(OpenCV REQUIRED)
 
-add_executable(MatClass MatClass.cpp MatClass.cpp)
+add_executable(MatClass.out MatClass.cpp MatClass.cpp)
 
-target_link_libraries(MatClass ${OpenCV_LIBS})
+target_link_libraries(MatClass.out ${OpenCV_LIBS})

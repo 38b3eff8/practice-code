@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 project(ScanImages)
 find_package(OpenCV REQUIRED)
-add_executable(ScanImages ScanImages.cpp)
-target_link_libraries(ScanImages ${OpenCV_LIBS})
+add_executable(ScanImages.out ScanImages.cpp)
+target_link_libraries(ScanImages.out ${OpenCV_LIBS})

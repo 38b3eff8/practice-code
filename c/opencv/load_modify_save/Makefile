@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/zhouyifan/Code/test-code/c/opencv/load_modify_save
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named LoadModifySave
+# Target rules for targets named LoadModifySave.out
 
 # Build rule for target.
-LoadModifySave: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 LoadModifySave
-.PHONY : LoadModifySave
+LoadModifySave.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 LoadModifySave.out
+.PHONY : LoadModifySave.out
 
 # fast build rule for target.
-LoadModifySave/fast:
-	$(MAKE) -f CMakeFiles/LoadModifySave.dir/build.make CMakeFiles/LoadModifySave.dir/build
-.PHONY : LoadModifySave/fast
+LoadModifySave.out/fast:
+	$(MAKE) -f CMakeFiles/LoadModifySave.out.dir/build.make CMakeFiles/LoadModifySave.out.dir/build
+.PHONY : LoadModifySave.out/fast
 
 LoadModifySave.o: LoadModifySave.cpp.o
 
@@ -129,7 +129,7 @@ LoadModifySave.o: LoadModifySave.cpp.o
 
 # target to build an object file
 LoadModifySave.cpp.o:
-	$(MAKE) -f CMakeFiles/LoadModifySave.dir/build.make CMakeFiles/LoadModifySave.dir/LoadModifySave.cpp.o
+	$(MAKE) -f CMakeFiles/LoadModifySave.out.dir/build.make CMakeFiles/LoadModifySave.out.dir/LoadModifySave.cpp.o
 .PHONY : LoadModifySave.cpp.o
 
 LoadModifySave.i: LoadModifySave.cpp.i
@@ -138,7 +138,7 @@ LoadModifySave.i: LoadModifySave.cpp.i
 
 # target to preprocess a source file
 LoadModifySave.cpp.i:
-	$(MAKE) -f CMakeFiles/LoadModifySave.dir/build.make CMakeFiles/LoadModifySave.dir/LoadModifySave.cpp.i
+	$(MAKE) -f CMakeFiles/LoadModifySave.out.dir/build.make CMakeFiles/LoadModifySave.out.dir/LoadModifySave.cpp.i
 .PHONY : LoadModifySave.cpp.i
 
 LoadModifySave.s: LoadModifySave.cpp.s
@@ -147,7 +147,7 @@ LoadModifySave.s: LoadModifySave.cpp.s
 
 # target to generate assembly for a file
 LoadModifySave.cpp.s:
-	$(MAKE) -f CMakeFiles/LoadModifySave.dir/build.make CMakeFiles/LoadModifySave.dir/LoadModifySave.cpp.s
+	$(MAKE) -f CMakeFiles/LoadModifySave.out.dir/build.make CMakeFiles/LoadModifySave.out.dir/LoadModifySave.cpp.s
 .PHONY : LoadModifySave.cpp.s
 
 # Help Target
@@ -156,9 +156,9 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... LoadModifySave"
+	@echo "... rebuild_cache"
+	@echo "... LoadModifySave.out"
 	@echo "... LoadModifySave.o"
 	@echo "... LoadModifySave.i"
 	@echo "... LoadModifySave.s"
