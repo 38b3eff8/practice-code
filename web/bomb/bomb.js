@@ -1,7 +1,7 @@
 function randint(a, b) {
-    let num = Math.random() * (b - a) + a;
-    return parseInt(num);
-};
+    const num = (Math.random() * (b - a)) + a;
+    return parseInt(num, 10);
+}
 
 class Bomb {
     /*
@@ -13,7 +13,7 @@ class Bomb {
     constructor({
         type = 0,
         display = false,
-        mark = false
+        mark = false,
     } = {}) {
         this.type = type;
         this.display = display;
@@ -25,7 +25,7 @@ class Space {
     constructor({
         row = 10,
         col = 10,
-        count = 10
+        count = 10,
     } = {}) {
         this.row = row;
         this.col = col;
@@ -37,9 +37,9 @@ class Space {
         }
 
         this.place = Array.from({
-            length: row
+            length: row,
         }, () => Array.from({
-            length: col
+            length: col,
         }, () => new Bomb()));
 
         this.bombs = [];
@@ -53,8 +53,8 @@ class Space {
     fresh() {
         this.first = true;
         this.status = true;
-        for (let i = 0; i < this.row; i++) {
-            for (let j = 0; j < this.col; j++) {
+        for (let i = 0; i < this.row; i += 1) {
+            for (let j = 0; j < this.col; j += 1) {
                 this.place[i][j].type = 0;
                 this.place[i][j].display = false;
                 this.place[i][j].mark = false;
@@ -68,14 +68,14 @@ class Space {
         let index = 0;
 
         while (index < this.count) {
-            let x = randint(0, this.col - 1);
-            let y = randint(0, this.row - 1);
+            const x = randint(0, this.col - 1);
+            const y = randint(0, this.row - 1);
 
-            if (exclude && exclude[0] == x && exclude[1] == y) {
+            if (exclude && exclude[0] === x && exclude[1] === y) {
                 continue;
             }
 
-            if (this.place[y][x].type == 0) {
+            if (this.place[y][x].type === 0) {
                 this.place[y][x].type = -1;
                 this.bombs.push([x, y]);
                 index += 1;
@@ -86,21 +86,24 @@ class Space {
     }
 
     fillNumber() {
-        for (let bomb of this.bombs) {
-            let xStart = bomb[0] - 1;
-            let yStart = bomb[1] - 1;
-            for (let x = xStart; x < xStart + 3; x++) {
-                for (let y = yStart; y < yStart + 3; y++) {
-                    if (x < 0 || y < 0 || x >= this.col || y >= this.row)
+        for (const bomb of this.bombs) {
+            const xStart = bomb[0] - 1;
+            const yStart = bomb[1] - 1;
+            for (let x = xStart; x < xStart + 3; x += 1) {
+                for (let y = yStart; y < yStart + 3; y += 1) {
+                    if (x < 0 || y < 0 || x >= this.col || y >= this.row) {
                         continue;
+                    }
 
-                    if (x == bomb[0] && y == bomb[1])
-                        continue
-
-                    if (this.place[y][x].type == -1)
+                    if (x === bomb[0] && y === bomb[1]) {
                         continue;
+                    }
 
-                    this.place[y][x].type++;
+                    if (this.place[y][x].type === -1) {
+                        continue;
+                    }
+
+                    this.place[y][x].type += 1;
                 }
             }
         }
@@ -111,12 +114,12 @@ class Space {
             return false;
         }
 
-        let bomb = this.place[y][x];
+        const bomb = this.place[y][x];
         if (bomb.display || bomb.mark) {
             return true;
         }
 
-        if (bomb.type == -1) {
+        if (bomb.type === -1) {
             bomb.display = true;
             this.status = false;
             return false;
@@ -132,8 +135,8 @@ class Space {
     }
 
     checkPlace(x, y) {
-        let bomb = this.place[y][x];
-        if (bomb.type == -1) {
+        const bomb = this.place[y][x];
+        if (bomb.type === -1) {
             return;
         }
 
@@ -143,19 +146,22 @@ class Space {
             return;
         }
 
-        let xStart = x - 1;
-        let yStart = y - 1;
-        for (let xx = xStart; xx < xStart + 3; xx++) {
-            for (let yy = yStart; yy < yStart + 3; yy++) {
-                if (xx == x && yy == y)
-                    continue
-
-                if (xx < 0 || yy < 0 || xx >= this.col || yy >= this.row)
+        const xStart = x - 1;
+        const yStart = y - 1;
+        for (let xx = xStart; xx < xStart + 3; xx += 1) {
+            for (let yy = yStart; yy < yStart + 3; yy += 1) {
+                if (xx === x && yy === y) {
                     continue;
+                }
 
-                let aroundBomb = this.place[yy][xx];
-                if (aroundBomb.type == -1 || aroundBomb.display || aroundBomb.mark)
+                if (xx < 0 || yy < 0 || xx >= this.col || yy >= this.row) {
                     continue;
+                }
+
+                const aroundBomb = this.place[yy][xx];
+                if (aroundBomb.type === -1 || aroundBomb.display || aroundBomb.mark) {
+                    continue;
+                }
                 this.checkPlace(xx, yy);
             }
         }
@@ -168,12 +174,12 @@ class Space {
     mark(x, y, mark) {
         this.place[y][x].mark = mark;
 
-        if (this.bombs.length == 0) {
+        if (this.bombs.length === 0) {
             return false;
         }
 
-        for (let point of this.bombs) {
-            let bomb = this.place[point[1]][point[0]];
+        for (const point of this.bombs) {
+            const bomb = this.place[point[1]][point[0]];
             if (!bomb.mark) {
                 return false;
             }
@@ -184,51 +190,49 @@ class Space {
 
     print(display = false) {
         if (!this.status) {
-            console.log("game over");
+            console.log('game over');
             return;
         }
 
-        let numBorder = Array.from({
-            length: this.col
+        const numBorder = Array.from({
+            length: this.col,
         }, (v, i) => i).join(' ');
-        console.log('    ' + numBorder + '  ');
+        console.log(`    ${numBorder}  `);
 
-        let topBorder = Array.from({
-            length: this.col
-        }, (v, i) => '─').join(' ');
+        const topBorder = Array.from({
+            length: this.col,
+        }, () => '─').join(' ');
 
-        console.log('  ┌ ' + topBorder + ' ┐');
+        console.log(`  ┌ ${topBorder} ┐`);
 
-        for (let index = 0; index < this.place.length; index++) {
-            let i = this.place[index];
-            let str = index + ' | ';
-            for (let j of i) {
+        for (let index = 0; index < this.place.length; index += 1) {
+            const i = this.place[index];
+            let str = `${index} | `;
+            for (const j of i) {
                 if (display) {
-                    if (j.type == -1) {
+                    if (j.type === -1) {
                         str += 'X ';
-                    } else if (j.type == 0) {
+                    } else if (j.type === 0) {
                         str += '  ';
                     } else {
-                        str += j.type + ' ';
+                        str += `${j.type} `;
+                    }
+                } else if (j.display) {
+                    if (j.type === -1) {
+                        str += 'X ';
+                    } else if (j.type === 0) {
+                        str += '  ';
+                    } else {
+                        str += `${j.type} `;
                     }
                 } else {
-                    if (j.display) {
-                        if (j.type == -1) {
-                            str += 'X ';
-                        } else if (j.type == 0) {
-                            str += '  ';
-                        } else {
-                            str += j.type + ' ';
-                        }
-                    } else {
-                        str += '0 ';
-                    }
+                    str += '0 ';
                 }
             }
 
             str += '│';
             console.log(str);
         }
-        console.log('  └ ' + topBorder + ' ┘');
+        console.log(`  └ ${topBorder} ┘`);
     }
 }

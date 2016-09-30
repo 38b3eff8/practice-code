@@ -7,7 +7,7 @@ class Rect {
         border = 1,
         strokeColor = 'black',
         fillColor = 'white',
-        lineWidth = 1
+        lineWidth = 1,
     } = {}) {
         this.x = x;
         this.y = y;
@@ -23,8 +23,8 @@ class Rect {
     }
 
     isContain(x, y) {
-        let xx = x - this.border,
-            yy = y - this.border;
+        const xx = x - this.border;
+        const yy = y - this.border;
         if (this.x > xx || this.y > yy || this.x + this.width < xx || this.y + this.height < yy) {
             return false;
         }
@@ -32,14 +32,15 @@ class Rect {
         return true;
     }
 
-    draw(context, text = null) {
+    draw(ctx, text = null) {
+        const context = ctx;
         context.save();
         context.strokeStyle = this.strokeColor;
         context.fillStyle = this.fillColor;
         context.lineWidth = this.lineWidth;
 
-        let width = this.width - this.border * 2;
-        let height = this.height - this.border * 2;
+        const width = this.width - (this.border * 2);
+        const height = this.height - (this.border * 2);
 
         context.translate(this.x + this.border, this.y + this.border);
         context.beginPath();
@@ -51,10 +52,11 @@ class Rect {
 
         if (text != null) {
             context.save();
-            context.fillStyle = "black";
-            context.font = Math.floor(width * 0.7) + "px arial";
-            context.textAlign = "center";
-            context.textBaseline = "middle";
+            context.fillStyle = 'black';
+            const fontSize = Math.floor(width * 0.7);
+            context.font = `${fontSize}px arial`;
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
             context.fillText(text, width / 2, height / 2);
             context.restore();
         }

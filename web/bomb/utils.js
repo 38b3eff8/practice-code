@@ -1,12 +1,13 @@
-var Utils = {
-    getMousePoint: function(element) {
-        var mouse = {
+const Utils = {
+    getMousePoint: (element) => {
+        const mouse = {
             x: 0,
-            y: 0
+            y: 0,
         };
 
-        element.addEventListener('mousemove', function(event) {
-            var x, y;
+        element.addEventListener('mousemove', (event) => {
+            let x;
+            let y;
             if (event.pageX || event.pageY) {
                 x = event.pageX;
                 y = event.pageY;
@@ -22,11 +23,11 @@ var Utils = {
             mouse.y = y;
         }, false);
 
-        element.addEventListener('mouseout', function(event) {
+        element.addEventListener('mouseout', () => {
             mouse.x = -1;
             mouse.y = -1;
         });
 
         return mouse;
-    }
-}
+    },
+};
