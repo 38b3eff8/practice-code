@@ -20,8 +20,8 @@
     <script src="bomb.js" charset="utf-8"></script>
     <script src="draw.js" charset="utf-8"></script>
     <script type="text/javascript">
-        let canvas = document.querySelector('#canvas'),
-            context = canvas.getContext('2d');
+        const canvas = document.querySelector('#canvas');
+        const context = canvas.getContext('2d');
 
         let rect = new Rect({
             border: 3,
@@ -68,9 +68,7 @@
                     let bomb = space.getPlace(i, j);
 
                     let text = null;
-                    if (mouse.x >= 0 && mouse.y >= 0 && rect.isContain(mouse.x, mouse.y) && !bomb.display && !bomb.mark) {
-                        rect.fillColor = "rgba(100,100,100,0.3)";
-                    } else if (bomb.display) {
+                    if (bomb.display) {
                         rect.fillColor = "white";
                         if (bomb.type != 0) {
                             text = bomb.type != -1 ? bomb.type : 'X';
@@ -78,10 +76,11 @@
                     } else if (bomb.mark) {
                         rect.fillColor = 'rgba(100,100,100,0.1)';
                         text = 'F';
+                    } else if (mouse.x >= 0 && mouse.y >= 0 && rect.isContain(mouse.x, mouse.y)) {
+                        rect.fillColor = "rgba(100,100,100,0.3)";
                     } else {
                         rect.fillColor = 'rgba(100,100,100,0.1)';
                     }
-
 
                     rect.draw(context, text);
                 }
