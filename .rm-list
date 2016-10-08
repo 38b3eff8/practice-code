@@ -9,3 +9,6 @@ CMakeCache.txt
 
 *.out
 *.so
+
+-node_modules/
+-.git/
