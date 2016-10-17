@@ -45,7 +45,7 @@ def callback(response):
 
         cover_detail = package.get('cover_detail')
         if cover_detail:
-            file_type = background_detail.get('format')
+            file_type = cover_detail.get('format')
             full_url = cover_detail.get('full_url')
             save_img(full_url, path + '/cover_detail.' + file_type)
 
@@ -63,5 +63,6 @@ def download_pacakge_list(s, host, callback):
 
     callback(r)
 
-# login(s, HOST)
-# download_pacakge_list(s, HOST, callback)
+if __name__ == '__main__':
+    login(s, HOST)
+    download_pacakge_list(s, HOST, callback)
