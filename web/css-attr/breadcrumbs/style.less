@@ -1,0 +1,37 @@
+.breadcrumb {
+    @item_h: 2rem;
+    .item {
+        display: inline-block;
+        text-align: center;
+        width: 5rem;
+        height: @item_h;
+        line-height: @item_h;
+        background-color: #0aece2;
+        color: white;
+        margin: 0 0.5rem;
+        position: relative;
+        &:not(:last-child):after {
+            border-width: @item_h / 2;
+            border-style: solid;
+            border-color: transparent transparent transparent #0aece2;
+            display: inline-block;
+            content: '';
+            width: 0;
+            height: 0;
+            position: absolute;
+            right: - @item_h;
+        }
+        &:not(:first-child):before {
+            border-style: solid;
+            border-width: @item_h / 2;
+            border-color: #0aece2 #0aece2 #0aece2 transparent;
+            display: inline-block;
+            content: '';
+            width: 0;
+            height: 0;
+            position: absolute;
+            left: - @item_h / 2;
+            z-index: -1;
+        }
+    }
+}
