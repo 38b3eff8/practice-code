@@ -1,0 +1,79 @@
+a {
+    text-decoration: none;
+}
+
+.radial_menu {
+    @wh: 20rem;
+    @btn_wh: 4rem;
+    height: @wh;
+    width: @wh;
+    // border: 1px solid;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    .button {
+        display: inline-block;
+        width: @btn_wh;
+        height: @btn_wh;
+        line-height: @btn_wh;
+        text-align: center;
+        color: white;
+        background-color: #66CCFF;
+        border-radius: 10px;
+    }
+    .center_btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        transform: translate(-50%, -50%);
+        &:hover~.buttons {
+            transform: scale(1);
+            transition: all 1s ease-in-out;
+        }
+    }
+    .buttons {
+        @half_w: @btn_wh / 2;
+        width: @wh;
+        height: @wh;
+        border-radius: @wh / 2;
+        transform: scale(0);
+        border: 1px dashed;
+        .button {
+            position: absolute;
+        }
+        .button:nth-child(1) {
+            top: -@half_w;
+            left: calc(~"50% - @{half_w}");
+        }
+        .button:nth-child(2) {
+            top: calc(~"14.6446% - @{half_w}");
+            left: calc(~"64.6446% + @{half_w}");
+        }
+        .button:nth-child(3) {
+            top: calc(~"50% - @{half_w}");
+            right: -@half_w;
+        }
+        .button:nth-child(4) {
+            top: calc(~"64.6446% + @{half_w}");
+            left: calc(~"64.6446% + @{half_w}");
+        }
+        .button:nth-child(5) {
+            top: calc(~"100% - @{half_w}");
+            left: calc(~"50% - @{half_w}");
+        }
+        .button:nth-child(6) {
+            top: calc(~"64.6446% + @{half_w}");
+            left: calc(~"14.6446% - @{half_w}");
+        }
+        .button:nth-child(7) {
+            top: calc(~"50% - @{half_w}");
+            left: calc(~"0% - @{half_w}");
+        }
+        .button:nth-child(8) {
+            top: calc(~"14.6446% - @{half_w}");
+            left: calc(~"14.6446% - @{half_w}");
+        }
+    }
+}
