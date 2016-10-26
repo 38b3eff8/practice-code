@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<div id="demo1">
+		<h1 v-if="ok">Yes</h1>
+		<h1 v-else>No</h1>
+
+		<!-- template v-if -->
+		<template v-if="ok">
+			<h1>Title</h1>
+			<p>Paragraph 1</p>
+			<p>Paragraph 2</p>
+		</template>
+
+		<div v-if="Math.random() > 0.5">
+			Now you see me
+		</div>
+		<div v-else>
+			Now you don't
+		</div>
+
+		<h1 v-show="ok">Hello!</h1>
+
+		<!--
+            v-if 切换消耗大，
+            v-show 初始化消耗大，
+            如果需要再运行时经常切换，使用v-show
+            如果再运行时不会发生改变，使用v-if
+        -->
+	</div>
+
+	<script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
+	<script>
+        var demo1 = new Vue({
+            el: '#demo1',
+            data: {
+                ok: true
+            }
+        });
+    </script>
+</body>
+
+</html>

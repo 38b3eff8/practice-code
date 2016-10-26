@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<div id="demo1">
+		<button @click="counter += 1">Add 1</button>
+		<p>The button above has been clicked {{ counter }}</p>
+
+		<hr>
+
+		<button @click="greet">Greet</button>
+		<button @click="say('hi')">Say hi</button>
+		<button @click="say('what')">Say what</button>
+
+		<button @click="warn('Form cannot be sumbitted yet.', $event)">Submit</button>
+
+		<input @keyup.enter="show" @keyup.right="add" @keyup.left="mul" v-model.number="value" type="number" />
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
+	<script>
+		var demo1 = new Vue({
+			el: '#demo1',
+			data: {
+				counter: 0,
+				name: 'Vue.js',
+				value: 12
+			},
+			methods: {
+				greet: function(event){
+					alert('Hello '+ this.name + '!');
+					alert(event.target.tagName);
+				},
+				say: function(message){
+					alert(message);
+				},
+				warn: function(message, event){
+					if(event) event.preventDefault();
+					alert(message);
+				},
+				show: function(){
+					alert(this.value);
+				},
+				add: function(){
+					this.value = this.value + 1;
+				},
+				mul:function(){
+					this.value = this.value - 1;
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

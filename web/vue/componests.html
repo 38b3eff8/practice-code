@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<div id="demo1">
+		<my-component></my-component>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
+	<script>
+        // global registration
+        Vue.component('my-component', {
+            template: '<div>A custom component!</div>'
+        });
+
+        var Child = {
+            template: '<div>A custom component!</div>'
+        };
+
+        var demo1 = new Vue({
+            el: '#demo1',
+            components: {
+                'my-component': Child
+            }
+        })
+    </script>
+</body>
+
+</html>

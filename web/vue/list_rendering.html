@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<ul id="demo1">
+		<li v-for="item in items">
+			{{ item.message }}
+		</li>
+
+		<hr>
+		<!-- index -->
+		<li v-for="(item, index) in items">
+			{{ parentMessage }} - {{ index }} - {{item.message }}
+		</li>
+
+		<hr>
+		<!-- template -->
+		<template v-for="item in items">
+			<li>{{ item.message }}</li>
+			<li class="divider"></li>
+		</template>
+
+		<hr>
+		<!-- Object v-for -->
+		<li v-for="value in object">
+			{{ value }}
+		</li>
+
+		<hr>
+
+		<li v-for="(value, key) in object">
+			{{ key }} : {{ value }}
+		</li>
+
+		<hr>
+
+		<li v-for="(value, key, index) in object">
+			{{ index }}. {{ key }} : {{ value }}
+		</li>
+	</ul>
+
+	<!-- range v-for -->
+	<div id="demo2">
+		<span v-for="n in 10">{{ n }}</span>
+	</div>
+
+	<!-- set array item -->
+	<!-- Vue.set(example1.items, indexOfItem, newValue) -->
+	<!-- example1.items.splice(indexOfItem, 1, newValue) -->
+
+	<!-- change array length -->
+	<!-- example1.items.splice(newLength) -->
+
+	<hr>
+
+	<div id="demo3">
+		<ul>
+			<li v-for="n in evenNumbers">{{ n }}</li>
+		</ul>
+
+		<ul>
+			<li v-for="n in even(numbers)">{{ n }}</li>
+		</ul>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
+	<script>
+        var demo1 = new Vue({
+            el: '#demo1',
+            data: {
+                parentMessage: 'Parent',
+                items: [
+                    { message: 'Foo' },
+                    { message: 'Bar' }
+                ],
+                object: {
+                    FirstName: 'John',
+                    LastName: 'Doe',
+                    Age: 20
+                }
+            }
+        });
+
+        var demo2 = new Vue({
+            el: '#demo2'
+        });
+
+        var demo3 = new Vue({
+            el: '#demo3',
+            data: {
+                numbers: [1, 2, 3, 4, 5]
+            },
+            computed: {
+                evenNumbers: function(){
+                    return this.numbers.filter(function(number){
+                        return number % 2 === 0;
+                    });
+                }
+            },
+            methods: {
+                even: function(numbers){
+                    return numbers.filter(function(number){
+                        return number % 2 === 0;
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

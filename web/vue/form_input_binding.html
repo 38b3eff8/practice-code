@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<div id="demo1">
+		<!-- input -->
+		<input v-model.trim="message" placeholder="edit me" />
+		<p>Message is: {{ message }}</p>
+
+		<hr>
+
+		<!-- multiline text -->
+		<span>Multiline message is:</span>
+		<p style="white-space: pre;">{{ multi_message }}</p>
+		<br>
+		<textarea v-model="multi_message" placeholder="add multiline lines"></textarea>
+
+		<hr>
+
+		<!-- checkbox -->
+		<input type="checkbox" id="checkbox" v-model="checked" />
+		<label for="checkbox">{{ checked }}</label>
+
+		<hr>
+
+		<input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+		<label for="jack">Jack</label>
+		<input type="checkbox" id="john" value="John" v-model="checkedNames" />
+		<label for="jack">John</label>
+		<input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+		<label for="Mike">Jack</label>
+		<br>
+		<span>Checked names: {{ checkedNames }}</span>
+
+		<hr>
+
+		<!-- radio -->
+		<input type="radio" id="one" value="One" v-model="picked" />
+		<label for="one">One</label>
+		<input type="radio" id="two" value="Two" v-model="picked" />
+		<label for="two">Two</label>
+		<br>
+		<span>Picked: {{ picked }}</span>
+
+		<br>
+
+		<!-- select -->
+		<select v-model="selected">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+		<span>Selected: {{ selected }}</span>
+
+		<br>
+
+		<!-- Multiple Select -->
+		<select v-model="multi_selected" multiple="multiple">
+			<option>A</option>
+            <option>B</option>
+            <option>C</option>
+		</select>
+		<span>Selected: {{ multi_selected }}</span>
+
+		<hr>
+
+		<select v-model="for_selected">
+			<option v-for="option in options" :value="option.value">
+				{{ option.text }}
+			</option>
+		</select>
+		<span>Selected: {{ for_selected }}</span>
+
+		<hr>
+
+		<!-- -->
+		<input type="checkbox" v-model="toggle" :true-value="a" :false-value="b">
+		<span>Selected: {{ toggle }}</span>
+	</div>
+	<script src=" http://cdn.bootcss.com/vue/2.0.3/vue.js "></script>
+	<script>
+        var deom1 = new Vue({
+            el: '#demo1',
+            data: {
+                message: '',
+                multi_message: '',
+                checked: false,
+                checkedNames: [],
+                picked: 'Two',
+                selected: 'B',
+				multi_selected: ['A', 'C'],
+				for_selected:'A',
+				options: [
+					{ text: 'One', value: 'A'},
+					{ text: 'Two', value: 'B'},
+					{ text: 'Three', value: 'C'},
+				],
+				toggle: false,
+				a: 'checked',
+				b: 'unchecked'
+            }
+        })
+    </script>
+</body>
+
+</html>

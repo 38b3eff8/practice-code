@@ -1,0 +1,88 @@
+<html>
+
+<head>
+	<title></title>
+</head>
+
+<body>
+	<div id="app">
+		<div><span>Message: {{ msg }}</span></div>
+
+		<div><span v-once>This will never change: {{ msg }}</span></div>
+
+		<hr/>
+
+		<!-- raw html -->
+		<div v-html="rawHtml"></div>
+
+		<hr/>
+
+		<!-- html attributes -->
+		<div v-bind:id="dynamicId">This element id is {{ dynamicId }}</div>
+		<div><button v-bind:disabled="someDynamicCondition">Button</button></div>
+
+		<hr/>
+
+		<!-- use javascript expression -->
+		<!-- 不可定义变量， 不能return -->
+		<div>{{ number + 1}}</div>
+		<div>{{ ok ? 'YES' : 'NO' }}</div>
+		<div>{{ message.split('').reverse().join('') }}</div>
+		<div v-bind:id="'list-' + id">This element id is {{ id }}</div>
+
+		<hr/>
+
+		<!-- filter -->
+		<!-- {{ message | filterA | filterB }} -->
+		<!-- {{ message | filterA('arg1', arg2) }} -->
+		<!-- the plain string 'arg1' will be passed into the filter as the second argument-->
+		<div>{{ message | capitalize }}</div>
+
+		<hr/>
+
+		<!-- Directives -->
+		<p v-if="seen">Now you see me</p>
+
+		<!-- Argument -->
+		<div><a v-bind:href="url">this url is {{ url }}</a></div>
+		<div><a :href="url">this url is {{ url }}</a></div>
+
+		<div><a v-on:click="doSomething">Click this</a></div>
+		<div><a @click="doSomething">Click this</a></div>
+
+		<!-- Modifiers -->
+		<form v-on:submit.prevent="onSubmit"></form>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				msg: 'This is a text',
+				rawHtml: '<span>This is raw html</span>',
+				dynamicId: 'div-id',
+				someDynamicCondition: true,
+				number: 10,
+				ok: false,
+				message: 'hello world',
+				id: 30,
+                seen: true,
+                url: 'www.baidu.com'
+			},
+			filters: {
+				capitalize: function(value){
+                    if(!value) return '';
+                    value = value.toString();
+                    return value.charAt(0).toUpperCase() + value.slice(1);
+				}
+			},
+            methods: {
+                doSomething: function(event){
+                    alert('haha');
+                }
+            }
+		});
+    </script>
+</body>
+
+</html>

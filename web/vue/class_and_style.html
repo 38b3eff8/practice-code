@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<!-- class -->
+	<div id="demo1">
+		<div class="static" :class="{active: isActive, 'text-dange': hasError}">This test class</div>
+		<div :class="classObject">This test class</div>
+	</div>
+
+	<div id="demo2">
+		<div :class="classObject">This test class</div>
+	</div>
+
+	<div id="demo3">
+		<div :class="[activeClass, errorClass]">This test class</div>
+		<div :class="[isActive ? activeClass : '', errorClass]">This test class</div>
+		<div :class="[{active: isActive}, errorClass]">This test class</div>
+	</div>
+
+	<!-- style -->
+	<div id="demo4">
+		<div :style="{color: activeColor, fontSize: fontSize + 'px'}">This test tyle</div>
+		<div :style="styleObject">This test style</div>
+	</div>
+
+	<div id="demo5">
+		<div :style="[baseStyles, overridingStyles]">This test style</div>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
+	<script>
+		var demo1  = new Vue({
+			el: '#demo1',
+			data: {
+				isActive: true,
+				hasError: false,
+				classObject: {
+					active: true,
+					'text-dange': false
+				}
+			}
+		});
+
+		var deom2 = new Vue({
+			el: '#demo2',
+			data: {
+				isActive: true,
+				error: null
+			},
+			computed: {
+				classObject: function(){
+					return {
+						active: this.isActive && !this.error,
+						'text-dange': this.error && this.error.type === 'fatal'
+					}
+				}
+			}
+		});
+
+		var demo3 = new Vue({
+			el: '#demo3',
+			data: {
+				isActive: false,
+				activeClass: 'active',
+				errorClass: 'text-dange',
+			}
+		});
+
+		var demo4 = new Vue({
+			el: '#demo4',
+			data: {
+				activeColor: 'red',
+				fontSize: 30,
+				styleObject: {
+					color: 'red',
+					fontSize: '13px'
+				}
+			}
+		});
+
+		var demo5 = new Vue({
+			el: '#demo5',
+			data: {
+				baseStyles: {
+					color: 'red',
+					fontSize: '14px'
+				},
+				overridingStyles: {
+					color: 'blue',
+					backgroundColor: 'yellow'
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
