@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		#progress {
+			border: 1px solid;
+			height: 30px;
+			width: 300px;
+			line-height: 30px;
+			text-align: center;
+			position: relative;
+		}
+		
+		.inner {
+			height: 30px;
+			background-color: #66ccff;
+			width: 0%;
+			position: absolute;
+			top: 0;
+			z-index: -1;
+		}
+	</style>
+</head>
+
+<body>
+	<input type="file" id="file" />
+	<button type="button" id="start">上传</button>
+	<div id="progress">
+		<span></span>
+		<div class="inner"></div>
+	</div>
+
+	<script>
+        var input = document.querySelector('#file');
+        var button = document.querySelector('#start');
+        var span = document.querySelector('#progress span');
+        var inner = document.querySelector('.inner');
+
+        button.addEventListener('click', function(event){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatuschange = function(){
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    console.log(xhr.responseText);
+                }else{
+                    console.log(xhr.statusText);
+                }
+            }
+
+            // xhr.onprogress = updateProgress;
+
+            /*
+            load事件：传输成功完成。
+            abort事件：传输被用户取消。
+            error事件：传输中出现错误。
+            loadstart事件：传输开始。
+            loadend事件：传输结束，但是不知道成功还是失败。
+            */
+            xhr.upload.addEventListener('progress', function(event){
+                if(event.lengthComputable){
+                    var percentComplete = event.loaded / event.total;
+                    var percent = Math.floor(percentComplete * 100) + '%';
+                    progress.innerText = percent;
+                    inner.style.width = percent;
+                }
+            }, false);
+
+            var file = input.files[0];
+            var formData = new FormData();
+            formData.append('file', file);
+
+            xhr.open('POST', 'http://localhost:5000');
+            xhr.send(formData);
+        }, false);
+    </script>
+</body>
+
+</html>

@@ -5,14 +5,40 @@
 	<title></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		#display {
+			width: 230px;
+		}
+		
+		.block {
+			width: 15px;
+			height: 15px;
+			border: 1px solid;
+			margin: 3px;
+			float: left;
+		}
+		
+		.ok {
+			background-color: #66ccff;
+		}
+	</style>
 </head>
 
 <body>
 	<input id="file" type="file" />
+	<button id="upload" type="button">上传</button>
+
+	<div id="display">
+	</div>
+	<script src="app.js"></script>
 	<script type="text/javascript">
 		var input = document.querySelector('#file');
-		input.addEventListener('change', function(event){
-			console.log(event);
+		var button = document.querySelector('#upload');
+
+		button.addEventListener('click', function(event){
+			var file = input.files[0];
+			var fileUpload = new FileUpload(file, '#display');
+			fileUpload.upload();
 		}, false);
 	</script>
 </body>
