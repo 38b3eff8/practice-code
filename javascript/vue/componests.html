@@ -11,11 +11,62 @@
 	<div id="demo1">
 		<my-component></my-component>
 	</div>
+
+	<div id="demo2">
+		<h1>I'm the parent title</h1>
+		<my-component2>
+			<p>This is some original content</p>
+			<p>This is some more original content</p>
+		</my-component2>
+	</div>
+
+	<div id="demo3">
+		<app-layout>
+			<h1 slot="header">Here might be a page title</h1>
+
+			<p>A paragraph for the main content</p>
+			<p>And another one.</p>
+
+			<p slot="footer">Here's some contact info</p>
+		</app-layout>
+	</div>
+
+	<div id="demo4">
+		<keep-alive>
+			<!-- 如果外面包着一层 keep-alive, 则每个组件都会保存在内存中 -->
+			<component :is="currentView"></component>
+		</keep-alive>
+	</div>
 	<script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
 	<script>
         // global registration
         Vue.component('my-component', {
             template: '<div>A custom component!</div>'
+        });
+
+        Vue.component('my-component2', {
+            template: '\
+            <div> \
+                <h2>I\'m the child title</h2> \
+                <slot> \
+                    This is will only be displayed if there is no content to be distributed.\
+                </slot> \
+            </div>'
+        });
+
+        Vue.component('app-layout', {
+            template: '\
+            <div class="container"> \
+                <header> \
+                    <slot name="header"></slot> \
+                </header> \
+                <main> \
+                    <slot></slot> \
+                </main> \
+                <footer> \
+                    <slot name="footer"></slot> \
+                </footer> \
+            </div>'
         });
 
         var Child = {
@@ -26,6 +77,32 @@
             el: '#demo1',
             components: {
                 'my-component': Child
+            }
+        });
+
+        var demo2 = new Vue({
+            el: '#demo2'
+        })
+
+        var demo3 = new Vue({
+            el: '#demo3'
+        })
+
+        var demo4 = new Vue({
+            el: '#demo4',
+            data: {
+                currentView: 'posts'
+            },
+            components: {
+                home: {
+                    template: '<div>This is home</div>'
+                },
+                posts: {
+                    template: '<div>This is posts</div>'
+                },
+                archive: {
+                    template: '<div>This is archive</div>'
+                }
             }
         })
     </script>
