@@ -1,0 +1,44 @@
+@keyframes flip {
+  from {
+    transform: rotateX(0deg);
+    z-index: 10;
+  }
+  to {
+    transform: rotateX(280deg);
+    z-index: 0;
+  }
+}
+.clock {
+  font-size: 0;
+  width: 13.8rem;
+  margin: 10rem auto 0;
+}
+.clock .clock-item {
+  position: relative;
+  perspective: 800px;
+  perspective-origin: center top;
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+  margin: 0 0.3rem;
+}
+.clock .clock-item div {
+  width: 4rem;
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  background-color: black;
+  color: white;
+  z-index: 1;
+  transform-origin: center top;
+}
+.clock .clock-item .flip {
+  animation: flip 1s;
+  animation-fill-mode: forwards;
+}

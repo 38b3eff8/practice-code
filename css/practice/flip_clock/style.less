@@ -1,0 +1,47 @@
+@keyframes flip {
+    from {
+        transform: rotateX(0deg);
+        z-index: 10;
+    }
+    to {
+        transform: rotateX(280deg);
+        z-index: 0;
+    }
+}
+
+@width: 4rem;
+@margin-lr: 0.3rem;
+.clock {
+    font-size: 0;
+    width: @width * 3 + @margin-lr * 6;
+    margin: 10rem auto 0;
+    .clock-item {
+        position: relative;
+        perspective: 800px;
+        perspective-origin: center top;
+        display: inline-block;
+        width: @width;
+        height: @width;
+        margin: 0 @margin-lr;
+        div {
+            width: @width;
+            height: @width;
+            line-height: @width;
+            font-size: @width / 2;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            text-align: center;
+            background-color: black;
+            color: white;
+            z-index: 1;
+            transform-origin: center top;
+        }
+        .flip {
+            animation: flip 1s;
+            animation-fill-mode: forwards;
+        }
+    }
+}
