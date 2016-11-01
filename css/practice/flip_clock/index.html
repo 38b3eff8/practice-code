@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="clock">
+
+		<div class="clock-item h">
+			<div class="first">1</div>
+			<div class="second">2</div>
+		</div>
+
+		<div class="clock-item m">
+			<div class="first">1</div>
+			<div class="second">2</div>
+		</div>
+
+		<div class="clock-item s">
+			<div class="first">1</div>
+			<div class="second">2</div>
+		</div>
+	</div>
+
+	<script>
+		var Flip = function(container, callback){
+			var clock_item = document.querySelector(container);
+			var first = clock_item.querySelector('.first');
+			var second = clock_item.querySelector('.second');
+			setInterval(function(){
+				var index = callback();
+				if(index % 2 == 0){
+					second.innerText = index; 
+
+					second.className = "second"
+					first.className = "first flip"
+				}else{
+					first.innerText = index;
+
+					first.className = "first"
+					second.className = "second flip"
+				}
+			}, 10);
+		}
+
+		new Flip('.s', function(){ 
+			return convert(new Date().getSeconds());
+		});
+
+		new Flip('.m', function(){
+			return convert(new Date().getMinutes());
+		});
+
+		new Flip('.h', function(){
+			return convert(new Date().getHours());
+		});
+
+		function convert(number){
+			return (number <= 9 ? '0' : '') + number;
+		}
+	</script>
+</body>
+
+</html>
