@@ -64,12 +64,24 @@
     transform: rotateX(-90deg) rotateZ(360deg) translateZ(5rem);
   }
 }
+@keyframes all {
+  0% {
+    transform: rotateZ(0dep);
+  }
+  50% {
+    transform: rotateZ(180deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
 .box {
   width: 10rem;
   height: 10rem;
   margin: 5rem auto;
   position: relative;
   perspective: 15rem;
+  animation: all 10s linear infinite;
 }
 .box .surface {
   position: absolute;
