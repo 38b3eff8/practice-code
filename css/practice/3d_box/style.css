@@ -66,7 +66,7 @@
 }
 @keyframes all {
   0% {
-    transform: rotateZ(0dep);
+    transform: rotateZ(0deg);
   }
   50% {
     transform: rotateZ(180deg);
