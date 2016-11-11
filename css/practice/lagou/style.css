@@ -1,0 +1,7 @@
+.container .block {
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid;
+  display: inline-block;
+  margin: 0.5rem;
+}

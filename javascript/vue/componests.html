@@ -2,67 +2,67 @@
 <html lang="en">
 
 <head>
-	<title></title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-	<div id="demo1">
-		<my-component></my-component>
-	</div>
+    <div id="demo1">
+        <my-component></my-component>
+    </div>
 
-	<div id="demo2">
-		<simple-counter></simple-counter>
-		<simple-counter></simple-counter>
-		<simple-counter></simple-counter>
-	</div>
+    <div id="demo2"><script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+        <simple-counter></simple-counter>
+    </div>
 
-	<div id="demo3">
-		<input v-model="parentMsg">
-		<br>
-		<child :my-message="parentMsg"></child>
-	</div>
+    <div id="demo3">
+        <input v-model="parentMsg">
+        <br>
+        <child :my-message="parentMsg"></child>
+    </div>
 
-	<div id="demo4">
-		<p>{{ total }}</p>
-		<button-counter @increment="incrementTotal"></button-counter>
-		<button-counter @increment="incrementTotal"></button-counter>
-	</div>
+    <div id="demo4">
+        <p>{{ total }}</p>
+        <button-counter @increment="incrementTotal"></button-counter>
+        <button-counter @increment="incrementTotal"></button-counter>
+    </div>
 
-	<div id="demo5">
-		<p>{{ message }}</p>
-		<my-input label="Message" v-model="message"></my-input>
-	</div>
+    <div id="demo5">
+        <p>{{ message }}</p>
+        <my-input label="Message" v-model="message"></my-input>
+    </div>
 
 
-	<div id="demo6">
-		<h1>I'm the parent title</h1>
-		<my-component2>
-			<p>This is some original content</p>
-			<p>This is some more original content</p>
-		</my-component2>
-	</div>
+    <div id="demo6">
+        <h1>I'm the parent title</h1>
+        <my-component2>
+            <p>This is some original content</p>
+            <p>This is some more original content</p>
+        </my-component2>
+    </div>
 
-	<div id="demo7">
-		<app-layout>
-			<h1 slot="header">Here might be a page title</h1>
+    <div id="demo7">
+        <app-layout>
+            <h1 slot="header">Here might be a page title</h1>
 
-			<p>A paragraph for the main content</p>
-			<p>And another one.</p>
+            <p>A paragraph for the main content</p>
+            <p>And another one.</p>
 
-			<p slot="footer">Here's some contact info</p>
-		</app-layout>
-	</div>
+            <p slot="footer">Here's some contact info</p>
+        </app-layout>
+    </div>
 
-	<div id="demo8">
-		<keep-alive>
-			<!-- 如果外面包着一层 keep-alive, 则每个组件都会保存在内存中 -->
-			<component :is="currentView"></component>
-		</keep-alive>
-	</div>
-	<script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
-	<script>
+    <div id="demo8">
+        <keep-alive>
+            <!-- 如果外面包着一层 keep-alive, 则每个组件都会保存在内存中 -->
+            <component :is="currentView"></component>
+        </keep-alive>
+    </div>
+    <script src="http://cdn.bootcss.com/vue/2.0.3/vue.js"></script>
+    <script>
         // global registration
         Vue.component('my-component', {
             template: '<div>A custom component!</div>'
