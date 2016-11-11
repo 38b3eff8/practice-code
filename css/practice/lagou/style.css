@@ -1,7 +1,105 @@
+@keyframes fromUp {
+  from {
+    top: -100%;
+    left: 0;
+  }
+  to {
+    top: 0;
+    left: 0;
+  }
+}
+@keyframes fromRight {
+  from {
+    top: 0;
+    left: 100%;
+  }
+  to {
+    top: 0;
+    left: 0;
+  }
+}
+@keyframes fromDown {
+  from {
+    top: 100%;
+    left: 0;
+  }
+  to {
+    top: 0;
+    left: 0;
+  }
+}
+@keyframes fromLeft {
+  from {
+    top: 0;
+    left: -100%;
+  }
+  to {
+    top: 0;
+    left: 0;
+  }
+}
+@keyframes leaveUp {
+  from {
+    top: 0;
+    left: 0;
+  }
+  to {
+    top: -100%;
+    left: 0;
+  }
+}
+@keyframes leaveRight {
+  from {
+    top: 0;
+    left: 0;
+  }
+  to {
+    top: 0;
+    left: 100%;
+  }
+}
+@keyframes leaveDown {
+  from {
+    top: 0;
+    left: 0;
+  }
+  to {
+    top: 100%;
+    left: 0;
+  }
+}
+@keyframes leaveLeft {
+  from {
+    top: 0;
+    left: 0;
+  }
+  to {
+    top: 0;
+    left: -100%;
+  }
+}
 .container .block {
   width: 8rem;
   height: 8rem;
   border: 1px solid;
   display: inline-block;
   margin: 0.5rem;
+  overflow: hidden;
+  position: relative;
+}
+.container .block .item {
+  height: 100%;
+  width: 100%;
+  background-color: #66CCFF;
+}
+.container .block .float-item {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+  position: absolute;
+  z-index: 1;
+  top: -100%;
+  left: 0;
+  /*transition-duration: 300ms;*/
+  /*transition: all 300ms ease;*/
 }
