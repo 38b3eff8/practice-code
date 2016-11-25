@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node
-{
-    int data;
-    struct Node *left;
-    struct Node *right;
-};
+#include "btree.h"
+#include "queue.h"
+#include "define.h"
 
-struct Node *initNode(int data)
+struct TreeNode *initTreeNode(int data)
 {
-    struct Node *node = malloc(sizeof(struct Node));
+    struct TreeNode *node = malloc(sizeof(struct TreeNode));
     node->left = NULL;
     node->right = NULL;
 
@@ -19,57 +16,89 @@ struct Node *initNode(int data)
     return node;
 }
 
-struct Node *createTree(int data)
+struct BTree *createTree()
 {
-    struct Node *root = initNode(data);
-    return root;
+    struct BTree *tree = malloc(sizeof(struct BTree));
+    tree->root = NULL;
+    return tree;
 }
 
-void destoryTree(struct Node *root)
+void destory(struct TreeNode *root)
 {
     if (root == NULL)
         return;
-    destoryTree(root->left);
-    destoryTree(root->right);
+    destory(root->left);
+    destory(root->right);
 
     free(root);
 }
 
-void printTree(struct Node *root)
+void destoryTree(struct BTree *tree)
+{
+    destory(tree->root);
+    free(tree);
+}
+
+void print(struct TreeNode *root)
 {
     if (root == NULL)
         return;
+
+    print(root->left);
     printf("%d ", root->data);
-    printTree(root->left);
-    printTree(root->right);
+    print(root->right);
 }
 
-void add(struct Node *root, int data)
+void printTree(struct BTree *tree)
+{
+    print(tree->root);
+    printf("\n");
+}
+
+void add(struct TreeNode *root, int data)
 {
     if (root->data == data)
         return;
-    else if (root->data < data)
+    else if (root->data > data)
     {
         if (root->left == NULL)
-            root->left = initNode(data);
+            root->left = initTreeNode(data);
         else
             add(root->left, data);
     }
     else
     {
         if (root->right == NULL)
-            root->right = initNode(data);
+            root->right = initTreeNode(data);
         else
             add(root->right, data);
     }
 }
 
-int main()
+void addTree(struct BTree *tree, int data)
 {
-    struct Node *root = createTree(10);
-    add(root, 1);
-    printTree(root);
-    printf("\n");
-    destoryTree(root);
-    return 0;
+    if (tree->root == NULL)
+    {
+        tree->root = initTreeNode(data);
+        return;
+    }
+    add(tree->root, data);
+}
+
+int find(struct TreeNode *root, int data)
+{
+    if (root == NULL)
+        return False;
+    if (root->data == data)
+        return True;
+
+    if (data > root->data)
+        return find(root->left, data);
+
+    return find(root->right, data);
+}
+
+int findTree(struct BTree *tree, int data)
+{
+    return find(tree->root, data);
 }
